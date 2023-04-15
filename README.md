@@ -1,17 +1,37 @@
-# solid-principles
+# Building project locally
+Install VirtualEnvironment (one time)
 
-La principal acción que se tomó para esta actividad en el codigo, fue separar en diferentes funciones todas las actividades que se realizan en el codigo fuente, para de esta manera cumplir uno por uno con los principios SOLID.
+    >python -m pip install virtualenv
 
-SRP: siguiendo el principio de una sola responsabilidad, dividí el código en 3 funciones principales, cada una con su responsabilidad unica lo que permite que mantengamos un codigo limpio y con capacidad de servir en su función.
+Create virtual environment
 
+    >virtualenv virtual_project
 
-OCP: las funciones ya tienen su objetivo claro y cumplen con su tarea, por lo que no es necesario modificarlas, sin embargo, pueden ser extensiones necesarias en algun punto posterior en el codigo. Por ejemplo, getMovies() podría obtener algun otro atributo de la variable "soup"
+1. This will create a virtual environment project folder and install python there.
+2. This step can be skipped if you already have the folder locally.
 
+Open virtual environment (Unix type OS)
 
-LSP: contamos con partes intercambiables del codigo que evitan que pueda fallar bajo ciertas circunstancias. Es decir, podríamos llamar la función de getMovies con alguna otra API siempre y cuando los parametros y la información de está ultima coincida
+    >source virtual_project/bin/activate
 
+1. This will activate the virtual environment.  Yous should see `(virtual_project)` to the left of the terminal prompt.
+2. This step will be needed each time.
 
-ISP: Evitamos depender de una o varias funciones gracias a la indenpendencia de estas, por dar un ejemplo, no es necesario llamar a la función de "createFile" si en algun momento decidimos desplegar nuestra información de alguna otra manera.
+Install requirements
+    
+    >python -m pip install -r requirements.txt
 
+Install local src/ folder
 
-DIP: evitamos la dependencia de nuestro codigo de alto nivel al de nivel bajo mediante el uso de abstracciones o bien de interfaces, de esta manera si es necesario cambiar algo en el codigo, no tendremos que tocar nada de las conexiones en alto nivel, si no todo en la parte de nivel bajo de nuestro codigo.
+    >python -m pip install -e src 
+
+# Building Docker image
+At the root of the project run
+
+    >docker image build -t YOUR_NAME .
+
+This will create a docker image using the `Dockerfile` with the image name `YOUR_NAME`
+
+Run container
+
+    >docker run YOUR_NAME
